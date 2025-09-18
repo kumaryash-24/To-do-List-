@@ -1,0 +1,5 @@
+{
+  "name": "Yash To Do",
+  "description": "A full-featured, visually stunning To-Do List application with authentication, task management, and smooth animations powered by Framer Motion, React, and Tailwind CSS.",
+  "requestFramePermissions": []
+}
