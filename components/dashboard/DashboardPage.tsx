@@ -16,6 +16,9 @@ import ConfirmationModal from '../ui/ConfirmationModal';
 
 const DashboardPage: React.FC = () => {
   const { currentUser, logout } = useAuth();
+  // By using a dynamic key (`tasks_${currentUser?.id}`), we ensure that tasks are
+  // stored separately and robustly for each user in localStorage. The `useLocalStorage`
+  // hook handles all the logic for persisting and retrieving this user-specific data.
   const [tasks, setTasks] = useLocalStorage<Task[]>(`tasks_${currentUser?.id}`, []);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -125,12 +128,14 @@ const DashboardPage: React.FC = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Header 
-              userName={currentUser?.name || ''} 
-              onLogout={() => setIsLogoutModalOpen(true)} 
-              searchTerm={searchTerm} 
-              setSearchTerm={setSearchTerm}
-            />
+            {currentUser && (
+              <Header 
+                user={currentUser} 
+                onLogout={() => setIsLogoutModalOpen(true)} 
+                searchTerm={searchTerm} 
+                setSearchTerm={setSearchTerm}
+              />
+            )}
           </motion.div>
 
           <motion.div variants={itemVariants}>

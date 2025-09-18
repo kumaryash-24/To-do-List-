@@ -6,10 +6,12 @@ import AuthLayout from './AuthLayout';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoginIllustration from './LoginIllustration';
 import { toast } from 'react-hot-toast';
+import { Eye, EyeOff } from '../ui/Icons';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -75,17 +77,34 @@ const LoginPage: React.FC = () => {
             className="w-full p-3 bg-white border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 transition-colors duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-600/20"
             required
           />
-          <motion.input
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 bg-white border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 transition-colors duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-600/20"
-            required
-          />
+            className="relative"
+          >
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 bg-white border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 transition-colors duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-600/20 pr-10"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </motion.div>
+          <div className="text-right -mt-2">
+            <Link to="/forgot-password" className="text-sm font-medium text-purple-600 hover:underline">
+              Forgot Password?
+            </Link>
+          </div>
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

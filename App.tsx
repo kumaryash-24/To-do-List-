@@ -7,6 +7,9 @@ import RegisterPage from './components/auth/RegisterPage';
 import DashboardPage from './components/dashboard/DashboardPage';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
+import ForgotPasswordPage from './components/auth/ForgotPasswordPage';
+import ResetPasswordPage from './components/auth/ResetPasswordPage';
+import ProfilePage from './components/profile/ProfilePage';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { currentUser } = useAuth();
@@ -22,11 +25,21 @@ const AppRoutes: React.FC = () => {
             <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="/reset-password/:email" element={<ResetPasswordPage />} />
                 <Route 
                     path="/" 
                     element={
                         <ProtectedRoute>
                             <DashboardPage />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/profile" 
+                    element={
+                        <ProtectedRoute>
+                            <ProfilePage />
                         </ProtectedRoute>
                     } 
                 />
