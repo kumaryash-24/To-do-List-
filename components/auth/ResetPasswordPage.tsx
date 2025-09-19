@@ -1,11 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import AuthLayout from './AuthLayout';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
-import ResetPasswordIllustration from './ResetPasswordIllustration';
 import { Eye, EyeOff } from '../ui/Icons';
 
 const ResetPasswordPage: React.FC = () => {
@@ -46,7 +44,7 @@ const ResetPasswordPage: React.FC = () => {
   };
 
   return (
-    <AuthLayout illustration={<ResetPasswordIllustration />}>
+    <AuthLayout>
       <motion.div 
         className="bg-slate-50 rounded-2xl p-6 sm:p-10 shadow-2xl"
         initial={{ opacity: 0, scale: 0.95 }}

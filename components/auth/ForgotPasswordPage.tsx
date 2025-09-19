@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from './AuthLayout';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
-import ForgotPasswordIllustration from './ForgotPasswordIllustration';
 
 const ForgotPasswordPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -28,7 +26,7 @@ const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <AuthLayout illustration={<ForgotPasswordIllustration />}>
+    <AuthLayout>
       <motion.div 
         className="bg-slate-50 rounded-2xl p-6 sm:p-10 shadow-2xl"
         initial={{ opacity: 0, scale: 0.95 }}

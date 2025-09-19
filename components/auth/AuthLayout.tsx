@@ -1,65 +1,23 @@
 import React from 'react';
-import ParallaxBackground from '../ui/ParallaxBackground';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import FireworksAndFlowers from './FireworksAndFlowers';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
-  illustration: React.ReactNode;
 }
 
-const AuthLayout: React.FC<AuthLayoutProps> = ({ children, illustration }) => {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        when: "beforeChildren",
-        staggerChildren: 0.2,
-      },
-    },
-    exit: {
-        opacity: 0,
-        transition: {
-            when: "afterChildren",
-            staggerChildren: 0.1,
-            staggerDirection: -1,
-        }
-    }
-  };
-
-  const panelVariants: Variants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] } },
-    exit: { opacity: 0, x: -30, transition: { duration: 0.4, ease: "easeIn" } }
-  };
-  
-  const formVariants: Variants = {
-    hidden: { opacity: 0, x: 30 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] } },
-    exit: { opacity: 0, x: 30, transition: { duration: 0.4, ease: "easeIn" } }
-  };
-
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="fixed inset-0 w-full flex items-center justify-center p-4 overflow-hidden">
-      <ParallaxBackground />
+      <FireworksAndFlowers />
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        className="w-full max-w-5xl z-10 grid md:grid-cols-2 gap-8 items-center"
+        initial={{ opacity: 0, y: -20, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 20, scale: 0.98 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 w-full max-w-md"
       >
-        <motion.div 
-          className="hidden md:flex justify-center items-center"
-          variants={panelVariants}
-        >
-          {illustration}
-        </motion.div>
-        
-        <motion.div variants={formVariants}>
-          {children}
-        </motion.div>
-        
+        {children}
       </motion.div>
     </div>
   );

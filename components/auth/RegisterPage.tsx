@@ -1,12 +1,10 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from './AuthLayout';
 import { motion, AnimatePresence } from 'framer-motion';
-import RegisterIllustration from './RegisterIllustration';
 import { toast } from 'react-hot-toast';
-import { Eye, EyeOff } from '../ui/Icons';
+import { Eye, EyeOff, GitHub, LinkedIn } from '../ui/Icons';
 
 const RegisterPage: React.FC = () => {
   const [name, setName] = useState('');
@@ -44,14 +42,14 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <AuthLayout illustration={<RegisterIllustration />}>
-      <motion.div 
-        className="bg-slate-50 rounded-2xl p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto"
+    <AuthLayout>
+      <motion.div
+        className="bg-slate-50 rounded-2xl p-6 sm:p-8 shadow-2xl"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <motion.div 
+        <motion.div
             className="text-center"
             initial="hidden"
             animate="visible"
@@ -63,7 +61,7 @@ const RegisterPage: React.FC = () => {
         
         <AnimatePresence>
             {error && (
-                <motion.p 
+                <motion.p
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
@@ -156,7 +154,7 @@ const RegisterPage: React.FC = () => {
             </motion.button>
         </form>
 
-        <motion.p 
+        <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.7 }}
@@ -166,6 +164,20 @@ const RegisterPage: React.FC = () => {
                 Log In
             </Link>
         </motion.p>
+        
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="mt-6 pt-4 border-t border-gray-200 flex justify-center items-center gap-5"
+        >
+            <a href="https://github.com/kumaryash-24" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 transition-colors" aria-label="GitHub Profile">
+                <GitHub size={24} />
+            </a>
+            <a href="https://www.linkedin.com/in/kumar-yash-592973227" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors" aria-label="LinkedIn Profile">
+                <LinkedIn size={24} />
+            </a>
+        </motion.div>
       </motion.div>
     </AuthLayout>
   );

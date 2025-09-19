@@ -1,10 +1,8 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from './AuthLayout';
 import { motion, AnimatePresence } from 'framer-motion';
-import LoginIllustration from './LoginIllustration';
 import { toast } from 'react-hot-toast';
 import { Eye, EyeOff } from '../ui/Icons';
 
@@ -35,7 +33,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <AuthLayout illustration={<LoginIllustration />}>
+    <AuthLayout>
       <motion.div 
         className="bg-slate-50 rounded-2xl p-6 sm:p-10 shadow-2xl max-h-[90vh] overflow-y-auto"
         initial={{ opacity: 0, scale: 0.95 }}

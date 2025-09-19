@@ -13,6 +13,7 @@ import ParallaxBackground from '../ui/ParallaxBackground';
 import Stats from './Stats';
 import { toast } from 'react-hot-toast';
 import ConfirmationModal from '../ui/ConfirmationModal';
+import { GitHub, LinkedIn } from '../ui/Icons';
 
 const DashboardPage: React.FC = () => {
   const { currentUser, logout } = useAuth();
@@ -189,6 +190,19 @@ const DashboardPage: React.FC = () => {
                 </AnimatePresence>
               </div>
           </motion.div>
+
+          <motion.footer variants={itemVariants} className="text-center mt-12 text-gray-500 text-sm">
+            <p>Created by Kumar Yash</p>
+            <div className="flex justify-center items-center gap-4 mt-2">
+                 <a href="https://github.com/kumaryash-24" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="GitHub Profile">
+                    <GitHub size={20} />
+                </a>
+                <a href="https://www.linkedin.com/in/kumar-yash-592973227" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors" aria-label="LinkedIn Profile">
+                    <LinkedIn size={20} />
+                </a>
+            </div>
+          </motion.footer>
+
         </motion.div>
       </div>
 
