@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import FireworksAndFlowers from './FireworksAndFlowers';
+import InteractiveParticles from './InteractiveParticles';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ interface AuthLayoutProps {
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="fixed inset-0 w-full flex items-center justify-center p-4 overflow-hidden">
-      <FireworksAndFlowers />
+      <InteractiveParticles />
       <motion.div
         initial={{ opacity: 0, y: -20, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}

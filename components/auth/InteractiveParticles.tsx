@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 
 const InteractiveParticles: React.FC = () => {
@@ -16,6 +17,20 @@ const InteractiveParticles: React.FC = () => {
     let animationFrameId: number;
 
     let particles: Particle[] = [];
+    
+    function debounce<F extends (...args: any[]) => any>(func: F, waitFor: number) {
+        let timeout: ReturnType<typeof setTimeout> | null = null;
+    
+        const debounced = (...args: Parameters<F>) => {
+            if (timeout !== null) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            timeout = setTimeout(() => func(...args), waitFor);
+        };
+    
+        return debounced as (...args: Parameters<F>) => void;
+    }
 
     class Particle {
       x: number;
@@ -52,7 +67,7 @@ const InteractiveParticles: React.FC = () => {
         let dx = mouse.current.x - this.x;
         let dy = mouse.current.y - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < 150) { // Increased interaction radius
+        if (distance < 150) { 
             const forceDirectionX = dx / distance;
             const forceDirectionY = dy / distance;
             const force = (150 - distance) / 150;
@@ -79,7 +94,9 @@ const InteractiveParticles: React.FC = () => {
 
     function init() {
       particles = [];
-      const numberOfParticles = (width * height) / 9000;
+      const isMobile = width < 768;
+      const particleDensity = isMobile ? 20000 : 9000;
+      const numberOfParticles = (width * height) / particleDensity;
       const colors = ['rgba(168, 85, 247, 0.6)', 'rgba(59, 130, 246, 0.6)', 'rgba(99, 102, 241, 0.5)'];
 
       for (let i = 0; i < numberOfParticles; i++) {
@@ -95,30 +112,12 @@ const InteractiveParticles: React.FC = () => {
 
     function animate() {
       if (!ctx) return;
-      // Trail effect by drawing a semi-transparent background
       ctx.fillStyle = 'rgba(26, 26, 26, 0.15)';
       ctx.fillRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
-
-        // Particle-to-particle collision
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[j].x - particles[i].x;
-            const dy = particles[j].y - particles[i].y;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            
-            if (distance < particles[i].size + particles[j].size) {
-                // Simple velocity swap for elastic collision
-                const tempSpeedX = particles[i].speedX;
-                const tempSpeedY = particles[i].speedY;
-                particles[i].speedX = particles[j].speedX;
-                particles[i].speedY = particles[j].speedY;
-                particles[j].speedX = tempSpeedX;
-                particles[j].speedY = tempSpeedY;
-            }
-        }
       }
       animationFrameId = requestAnimationFrame(animate);
     }
@@ -129,12 +128,14 @@ const InteractiveParticles: React.FC = () => {
       init();
     };
 
+    const debouncedResize = debounce(handleResize, 250);
+
     const handleMouseMove = (e: MouseEvent) => {
         mouse.current.x = e.clientX;
         mouse.current.y = e.clientY;
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', debouncedResize);
     window.addEventListener('mousemove', handleMouseMove);
     
     init();
@@ -142,7 +143,7 @@ const InteractiveParticles: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', debouncedResize);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
