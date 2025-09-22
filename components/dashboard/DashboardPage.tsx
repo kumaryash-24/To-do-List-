@@ -10,7 +10,7 @@ import AddTaskForm from './AddTaskForm';
 import TaskItem from './TaskItem';
 import EditTaskModal from './EditTaskModal';
 import ParallaxBackground from '../ui/ParallaxBackground';
-import Stats from './Stats';
+import Charts from './Charts';
 import { toast } from 'react-hot-toast';
 import ConfirmationModal from '../ui/ConfirmationModal';
 import { GitHub, LinkedIn } from '../ui/Icons';
@@ -39,7 +39,13 @@ const DashboardPage: React.FC = () => {
 
   const toggleTask = (id: string) => {
     const taskToToggle = tasks.find(task => task.id === id);
-    setTasks(tasks.map(task => (task.id === id ? { ...task, completed: !task.completed } : task)));
+    setTasks(
+      tasks.map(task =>
+        task.id === id
+          ? { ...task, completed: !task.completed, completedAt: !task.completed ? Date.now() : null }
+          : task
+      )
+    );
      if (taskToToggle) {
         toast.success(taskToToggle.completed ? `Task marked as pending: "${taskToToggle.text}"` : `Task completed: "${taskToToggle.text}"`);
     }
@@ -68,7 +74,14 @@ const DashboardPage: React.FC = () => {
 
   const markAllComplete = () => {
     const allCompleted = tasks.every(task => task.completed);
-    setTasks(tasks.map(task => ({ ...task, completed: !allCompleted })));
+    const newCompletionStatus = !allCompleted;
+    setTasks(
+      tasks.map(task => ({
+        ...task,
+        completed: newCompletionStatus,
+        completedAt: newCompletionStatus ? task.completedAt || Date.now() : null,
+      }))
+    );
     toast.success(allCompleted ? 'All tasks unmarked.' : 'All tasks marked complete.');
   };
 
@@ -83,16 +96,6 @@ const DashboardPage: React.FC = () => {
       .filter(task => task.text.toLowerCase().includes(searchTerm.toLowerCase()))
       .sort((a, b) => (a.completed === b.completed ? b.createdAt - a.createdAt : a.completed ? 1 : -1));
   }, [tasks, searchTerm]);
-
-  const stats = useMemo(() => {
-    const completed = tasks.filter(task => task.completed).length;
-    const pending = tasks.length - completed;
-    return {
-      total: tasks.length,
-      completed,
-      pending,
-    };
-  }, [tasks]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -140,10 +143,10 @@ const DashboardPage: React.FC = () => {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Stats stats={stats} />
+            <Charts tasks={tasks} />
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="mt-8">
             <AddTaskForm onAddTask={addTask} />
           </motion.div>
           

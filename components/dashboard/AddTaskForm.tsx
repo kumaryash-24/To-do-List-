@@ -24,7 +24,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new brilliant task..."
+        placeholder="What's next on your list?"
         className="flex-grow bg-[#2e2e2e] shadow-neumorphic-dark-inset text-white placeholder-gray-500 rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow"
       />
       <motion.button

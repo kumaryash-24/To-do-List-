@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Node = ({ cx, cy, delay }: { cx: number, cy: number, delay: number }) => (
+// Fix: Type the component with React.FC to correctly handle the 'key' prop.
+const Node: React.FC<{ cx: number, cy: number, delay: number }> = ({ cx, cy, delay }) => (
   <motion.circle
     cx={cx}
     cy={cy}
@@ -21,7 +22,8 @@ const Node = ({ cx, cy, delay }: { cx: number, cy: number, delay: number }) => (
   </motion.circle>
 );
 
-const Line = ({ x1, y1, x2, y2, delay }: { x1: number, y1: number, x2: number, y2: number, delay: number }) => (
+// Fix: Type the component with React.FC to correctly handle the 'key' prop.
+const Line: React.FC<{ x1: number, y1: number, x2: number, y2: number, delay: number }> = ({ x1, y1, x2, y2, delay }) => (
     <motion.line
         x1={x1} y1={y1} x2={x2} y2={y2}
         stroke="url(#reg-grad)"

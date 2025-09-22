@@ -1,4 +1,3 @@
-
 export interface User {
   id: string;
   name: string;
@@ -12,4 +11,5 @@ export interface Task {
   text: string;
   completed: boolean;
   createdAt: number;
+  completedAt?: number | null;
 }
