@@ -10,7 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import ForgotPasswordPage from './components/auth/ForgotPasswordPage';
 import ResetPasswordPage from './components/auth/ResetPasswordPage';
 import ProfilePage from './components/profile/ProfilePage';
-
+              
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { currentUser } = useAuth();
   if (!currentUser) {
