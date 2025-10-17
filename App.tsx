@@ -2,15 +2,15 @@
 import React from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import LoginPage from './components/auth/LoginPage';                
-import RegisterPage from './components/auth/RegisterPage';                     
-import DashboardPage from './components/dashboard/DashboardPage';                                                         
-import { AnimatePresence } from 'framer-motion';                                                           
-import { Toaster } from 'react-hot-toast';                          
-import ForgotPasswordPage from './components/auth/ForgotPasswordPage';                                                      
-import ResetPasswordPage from './components/auth/ResetPasswordPage';                                     
-import ProfilePage from './components/profile/ProfilePage';                     
-                  
+import LoginPage from './components/auth/LoginPage';
+import RegisterPage from './components/auth/RegisterPage';
+import DashboardPage from './components/dashboard/DashboardPage';
+import { AnimatePresence } from 'framer-motion';
+import { Toaster } from 'react-hot-toast';
+import ForgotPasswordPage from './components/auth/ForgotPasswordPage';
+import ResetPasswordPage from './components/auth/ResetPasswordPage';
+import ProfilePage from './components/profile/ProfilePage';
+
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { currentUser } = useAuth();
   if (!currentUser) {

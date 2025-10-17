@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, Link } from 'react-router-dom';
@@ -31,8 +32,8 @@ const RegisterPage: React.FC = () => {
       setError(errorMessage);
       toast.error(errorMessage);
     } else {
-      toast.success('Registration successful! Please log in.');
-      navigate('/login');
+      toast.success('Registration successful! Welcome.');
+      navigate('/');
     }
   };
 

@@ -51,6 +51,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const passwordHash = btoa(password_plaintext);
     const newUser: User = { id: Date.now().toString(), name, email, passwordHash };
     setUsers([...users, newUser]);
+    setCurrentUser(newUser);
     return true;
   };
 
