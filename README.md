@@ -5,10 +5,10 @@
 <p align="center">
   <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmkxbW1tczRuOGg0Z2F3eGRhaG1hbjVvY3U3cWhwM2ZocWFuODV2ZyZjdD1n/qgQUggAC3Pfv687qPC/giphy.gif" alt="Yash To Do App Demo" />
 </p>
-  
+
 
 [👉 Try Yash To Do App](https://to-do-list-yash-24.vercel.app/#/login)
-  
+
 
 
 A full-featured, visually stunning To-Do List application built with a focus on exceptional UI/UX. This project combines a sleek, modern design with fluid animations to create a delightful user experience. It features a complete authentication flow and robust task management functionalities, all persisted locally in your browser.
@@ -102,3 +102,7 @@ The codebase is organized to be clean, scalable, and easy to navigate.
 ```
 
 ---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
