@@ -102,7 +102,3 @@ The codebase is organized to be clean, scalable, and easy to navigate.
 ```
 
 ---
-
-## 📄 License
-
-This project is licensed under the MIT License - see the `LICENSE` file for details.
